@@ -7,6 +7,11 @@
 
 require('./bootstrap');
 
+require('../font-awesome/fa-regular.min.js');
+require('../font-awesome/fa-brands.min.js');
+require('../font-awesome/fa-solid.min.js');
+require('../font-awesome/fontawesome.min.js');
+
 window.Vue = require('vue');
 
 /**

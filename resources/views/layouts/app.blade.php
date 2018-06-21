@@ -10,22 +10,23 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="@yield('style')">
     <div id="app">
         <main class="container container-small">
-            <h1 class="h2 my-3 site-title text-center">
-                <a href="/"><i class="fa fa-circle" style="margin-right: -5px"></i> Disket</a>
+            <h1 class="site-title text-center">
+                <a href="/">
+                    <span class="fa-layers" style="margin-right: -5px">
+                        <i class="fa fa-circle"></i>
+                        <span class="fa-layers-text" data-fa-transform="shrink-11.5 rotate--30" style="font-weight:900">01010</span>
+                    </span>
+                    <span>Disket</span>
+                </a>
             </h1>
             @yield('content')
         </main>

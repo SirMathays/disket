@@ -11,7 +11,7 @@
 					</a>
 				</div>
 				<div class="px-2 py-3">
-					<h4 class="text-center" style="margin-bottom: 0">{{ lane }}. Väylä</h4>
+					<h4 class="text-center" style="margin-bottom: 0">{{ lane }}. väylä</h4>
 				</div>
 				<div class="px-2 py-3">
 					<a @click="e => navLink(e, nextLane)" href="#" v-bind:class="{disabled: !nextLane}">
@@ -19,27 +19,46 @@
 					</a>
 				</div>
 			</div>
-			<div class="d-flex justify-content-between form-group">
+			<div class="d-flex justify-content-between my-1">
 				<div class="px-2 pt-3 w-100">
-					<b-btn :block="true" variant="primary" @click="score = birdie">
+					<b-btn :block="true" variant="primary" @click="setAndSave(ace)">
+						<span class="hideMobile">Ace</span>
+						<span class="badge badge-pill badge-light">{{ ace }}</span>
+					</b-btn>
+				</div>
+				<div class="px-2 pt-3 w-100">
+					<b-btn :block="true" variant="primary" @click="setAndSave(birdie)">
 						<span class="hideMobile">Birdie</span>
 						<span class="badge badge-pill badge-light">{{ birdie }}</span>
 					</b-btn>
 				</div>
 				<div class="px-2 pt-3 w-100">
-					<b-btn :block="true" variant="primary" @click="score = currentPar">
+					<b-btn :block="true" variant="primary" @click="setAndSave(currentPar)">
 						<span class="hideMobile">Par</span>
 						<span class="badge badge-pill badge-light">{{ currentPar }}</span>
 					</b-btn>
 				</div>
+			</div>
+			<div class="d-flex justify-content-between mt-1 mb-3">
 				<div class="px-2 pt-3 w-100">
-					<b-btn :block="true" variant="primary" @click="score = boogie">
-						<span class="hideMobile">Boogie</span>
-						<span class="badge badge-pill badge-light">{{ boogie }}</span>
+					<b-btn :block="true" variant="primary" @click="setAndSave(bogey)">
+						<span class="hideMobile">Bogey</span>
+						<span class="badge badge-pill badge-light">{{ bogey }}</span>
+					</b-btn>
+				</div>
+				<div class="px-2 pt-3 w-100">
+					<b-btn :block="true" variant="primary" @click="setAndSave(doubleBogey)">
+						<span class="hideMobile">D-bogey</span>
+						<span class="badge badge-pill badge-light">{{ doubleBogey }}</span>
+					</b-btn>
+				</div>
+				<div class="px-2 pt-3 w-100">
+					<b-btn :block="true" variant="primary" @click="other = !other">
+						<span>Muu</span>
 					</b-btn>
 				</div>
 			</div>
-			<div class="form-group px-2">
+			<div class="mt-5 mb-3 px-2" v-if="other">
 				<div class="input-group input-group-lg">
 					<div class="input-group-prepend">
 						<b-btn variant="primary" @click="score--"><i class="fa fa-minus"></i></b-btn>
@@ -49,9 +68,9 @@
 						<b-btn variant="primary" @click="score++"><i class="fa fa-plus"></i></b-btn>
 					</div>
 				</div>
-			</div>
-			<div class="form-group px-2 mt-5">
-				<b-btn variant="primary" :block="true" @click="save">Tallenna</b-btn>
+				<div class="mt-3">
+					<b-btn variant="primary" :block="true" @click="save">Tallenna</b-btn>
+				</div>
 			</div>
 		</div>
 
@@ -116,6 +135,7 @@
 			return {
 				score: this.player && this.player.stats && this.player.stats[this.lane] ? this.player.stats[this.lane] : 3,
 				username: undefined,
+				other: false
 			}
 		},
 		computed: {
@@ -157,11 +177,17 @@
 
 				return '/chart/' + this.data.secret_key + rest
 			},
+			ace: function() {
+				return 1
+			},
 			birdie: function () {
 				return this.currentPar - 1
 			},
-			boogie: function () {
+			bogey: function () {
 				return this.currentPar + 1
+			},
+			doubleBogey: function () {
+				return this.currentPar + 2
 			}
 		},
 		methods: {
@@ -179,6 +205,10 @@
 			},
 			calcDifference(value, par) {
 				return value - par
+			},
+			setAndSave(amount) {
+				this.score = amount
+				this.save()
 			},
 			save() {
 				var app = this

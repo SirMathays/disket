@@ -1,9 +1,9 @@
 <template>
-	<div class="form-group mb-4 mt-5">
+	<div>
 		<div class="input-group input-group-lg">
 			<input type="text" class="form-control" placeholder="Koodi" @keyup.enter="goTo" v-model="url">
 			<div class="input-group-append">
-				<b-btn variant="primary" @click="goTo">Etsi</b-btn>
+				<b-btn variant="primary" @click="goTo"><i class="fa fa-search"></i></b-btn>
 			</div>
 		</div>
 	</div>

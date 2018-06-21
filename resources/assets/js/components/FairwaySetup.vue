@@ -2,12 +2,12 @@
 	<div class="card">
 
 		<fairway-title :data="{name: name, lanes: lanes}">
-			<div slot="middle" class="d-flex flex-wrap justify-content-start">
-				<div class="px-2 py-3 text-center" v-for="lane, index in lanes">
+			<transition-group name="fade" slot="middle" class="d-flex flex-wrap justify-content-start">
+				<div class="px-2 py-3 text-center" v-for="lane, index in lanes" :key="index">
 					<div><b>{{ index+1 }}.</b></div>
 					<div>par {{ lane.par }}</div>
 				</div>
-			</div>
+			</transition-group>
 
 			<div slot="footer" class="mt-5 text-right">
 				<a href="#edit" v-smooth-scroll="{ duration: 500, offset: -25 }" class="btn btn-lg btn-outline-light">Muokkaa</a>
@@ -93,6 +93,13 @@
 <style>
 	label {
 		display: block;
+	}
+
+	.fade-enter-active, .fade-leave-active {
+		transition: .4s opacity
+	}
+	.fade-enter, .fade-leave-to {
+		opacity: 0;
 	}
 
 	.lane-enter-active, .lane-leave-active {

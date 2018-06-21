@@ -8,30 +8,75 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+$mobileMaxWidth: 576px;
+$tabletMaxWidth: 767px;
+
+.splash {
+	background: linear-gradient(to bottom right, $green, mix($green, $blue, 50));
+	min-height: 100vh;
+
+	h1.site-title {
+		margin-top: 1.5em;
+		margin-bottom: 1.5em;
+		font-size: 2.2rem;
+		a, a:hover, a:focus, a:active {
+			color: white;
+
+			.fa-layers-text {
+				color: $green
+			}
+		}
+	}
+
+	.card {
+		.card-header {
+			background: $white;
+		}
+
+		.card-body {
+			background: $secondary;
+		}
+	}
+}
+
 .container-small {
-	max-width: 540px;
+	max-width: $mobileMaxWidth;
 	padding-top: 4em;
 	padding-bottom: 4em;
+	transition: .4s;
 
-	@media screen and (max-width:540px) {
+	@media screen and (max-width: $mobileMaxWidth) {
 		padding: 0;
 	}
 }
 
 h1.site-title {
-	a, 
-	a:hover, 
-	a:focus, 
-	a:active  {
+
+	margin-top: 0px;
+	margin-bottom: 2em;
+	transition: .4s;
+	font-size: 1.8rem;
+
+	@media screen and (max-width: $mobileMaxWidth) {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+
+	a, a:hover, a:focus, a:active {
 		color: #000;
 		font-weight: 800;
 		text-decoration: none;
+
+		.fa-layers-text {
+			color: $body-bg
+		}
 	}
 }
 
 .card {
 	border: 0;
-	border-radius: 7px;
+	border-radius: 8px;
+	overflow: hidden;
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
 
 	.card-header {
@@ -75,7 +120,7 @@ h1.site-title {
     flex: 0 0 auto;
 
 	&.active {
-		border: 1px $secondary solid;
+		border: 1px $gray-600 solid;
 	}
 
 	&:hover {
@@ -86,7 +131,7 @@ h1.site-title {
 }
 
 .lane-id {
-	background-color: $secondary;
+	background-color: $gray-600;
 	color: white;
 	position: absolute;
 	top: 0;
